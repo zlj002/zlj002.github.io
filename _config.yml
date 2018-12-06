@@ -1,6 +1,6 @@
 # Site settings
 title: Lorin Blog
-SEOTitle: 你的博客 | Your Blog
+SEOTitle: Lorin | Lorin Blog
 header-img: img/home-bg.jpg
 email: lorinzhang@163.com
 description: ""
@@ -15,7 +15,7 @@ RSS: false
 weibo_username:     ''
 zhihu_username:     ''
 github_username:    zlj002
-#twitter_username:  huxpro
+#twitter_username:  ''
 facebook_username:  ''
 
 
@@ -82,8 +82,8 @@ featured-condition-size: 1              # A tag will be featured if the size of 
 # Friends
 friends: [
     # {
-    #     title: "Hux Blog",
-    #     href: "http://huangxuan.me"
+    #     title: "Lorin Blog",
+    #     href: "http://www.baidu.com"
     # },
     {
         title: "Foo",
