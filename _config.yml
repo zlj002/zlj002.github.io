@@ -3,7 +3,7 @@ title: Lorin Blog
 SEOTitle: Lorin | Lorin Blog
 header-img: img/home-bg.jpg
 email: lorinzhang@163.com
-description: ""
+description: "talk is cheap,show me the code"
 keyword: ""
 url: "http://auther.lvseziran.com"              # your host, for absolute URL
 baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
@@ -12,11 +12,11 @@ baseurl: ""         # for example, '/blog' if your blog hosted on 'host/blog'
 
 # SNS settings
 RSS: false
-weibo_username:     ''
-zhihu_username:     ''
+weibo_username:     '3959025559'
+zhihu_username:     'zhang-69-73'
 github_username:    zlj002
 #twitter_username:  ''
-facebook_username:  ''
+#facebook_username:  ''
 
 
 
@@ -50,7 +50,7 @@ kramdown:
 #disqus_username: _your_disqus_short_name_
 
 # Duoshuo settings
-duoshuo_username: lorinzhang
+# duoshuo_username: lorinzhang
 # Share component is depend on Comment so we can NOT use share only.
 duoshuo_share: false                     # set to false if you want to use Comment without Sharing
 
