@@ -1,0 +1,37 @@
+---
+layout: post
+title: '构建自己的脚手架'
+subtitle: '使用脚手架很方便工作，构建自己的脚手架更方便'
+date: 2019-01-12
+author: 'Lorin'
+header-img: 'img/post-bg-unix-linux.jpg'
+tags:
+    - 前端开发
+---
+
+> 当我们愉快的使用 vue-cli 的时候可能会想到他是如何帮我们生成目录的？什么时候需要脚手架？脚手架的原理技术栈？
+
+项目开始从零开始搭建项目结构，尤其是公司内一些增长运营的短期项目，有可能生命周期短，频繁新建项目，这时候脚手架可以帮助我们迅速创建结构
+
+如果你了解过 yeoman,并用 yeoman 生成过项目，那么可以思考一下生成过程，不同的是 yeoman 是需要用户将模板放到指定的目录 templates 中，那么我们的思路可以将模板文件指定到远程仓库，用户输入对应模板文件，利用 [download-git-repo](https://www.npmjs.com/package/download-git-repo) 去下载到指定目录即可完成,**<font color="red">注意 download-git-repo 的 api 参数结构是 [github/gitlab/Bitbucket]:[账户名]/[仓库名] 所以不是 平时 git clone 的地址，注意！</font>**
+
+用到的技术点
+
+-   npm 包括其发布过程要了解一下，让前端程序员 npm 之后使用的
+-   node.js 这个是必须的
+-   [commander](https://github.com/tj/commander.js/) 命令行处理工具
+-   [inquirer](https://github.com/SBoudrias/Inquirer.js) 处理命令行交互的插件
+
+项目结构 [完整代码请点击这里](https://github.com/zlj002/aha_generator)
+![项目结构](https://img-blog.csdn.net/2018082820005850?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3psajAwMg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+-   从图中可以看出支持 模板的新增，删除，初始化项目，列表
+-   其中新增，删除，列表 都是操作的 templates.json 文件
+-   关键的代码在 init.js 中，即当用户输入 ahaschool init 时执行的动作
+    ![初始化项目](https://img-blog.csdn.net/20180828201146570?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3psajAwMg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+
+-   可以看到当用户输入项目名称在 templates.json 存在时将去 clone 指定的项目地址
+**<font color="red">注意 download-git-repo 的 api 参数结构是 [github/gitlab/Bitbucket]:[账户名]/[仓库名] 所以不是 平时 git clone 的地址，注意！</font>**
+
+> 结束语
+> 某些看起来想魔法一样的盒子，当你打开他的时候，会有很多意外收获。再补一句汤，如果没有感觉今天的自己比昨天有进步那么就是在倒退
