@@ -1,0 +1,16 @@
+---
+layout:     post
+title:      "博客搬家"
+subtitle:   " \"哈哈哈，换个地方\""
+date:       2015-01-29 12:00:00
+author:     "Lorin"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - 生活
+---
+
+> “鉴于往事有资治于道”
+
+
+[时空穿梭,过往记录](https://blog.csdn.net/lorinzhang "csdn")
+ 
