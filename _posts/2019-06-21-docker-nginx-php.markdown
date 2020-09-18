@@ -73,14 +73,62 @@ echo phpinfo();
 
 开始创建项目容器
 将上面的容器生成镜像
-docker run --name  aha-php-fpm -v ~/workspace/hjm_wx/src:/www  --privileged=true -d php:7.1-fpm
+docker run --name  aha-php-fpm -v $PWD:/www  --privileged=true -d php:7.1-fpm
 
 docker run --name aha-php-nginx -p 80:80 -d \
     --privileged=true \
-    -v ~/workspace/hjm_wx:/usr/share/nginx/html/aha-wx:ro \
+    -v ~/workspace/hjm_wx/src:/usr/share/nginx/html/aha-wx:ro \
     -v ~/nginx/conf/conf.d:/etc/nginx/conf.d:ro \
     --link aha-php-fpm:php \
     nginx
+
+
+开发使用：
+多个项目统一的目录  ~/workspace
+创建 aha-php-fpm
+docker run --name  aha-php-fpm -v ~/workspace:/www  --privileged=true -d php:7.1-fpm
+创建 aha-php-nginx
+    docker run --name aha-php-nginx -p 80:80 -d \
+    --privileged=true \
+    -v ~/workspace:/www:ro \
+    -v ~/nginx/conf/conf.d:/etc/nginx/conf.d:ro \
+    --link aha-php-fpm:php \
+    nginx
+新增站点配置
+server {
+        listen 80;
+        server_name localhost;
+        root /www/项目名称/发布后的目录;
+        index index.php index.html;
+        #access_log /usr/local/var/log/nginx/access.log;
+        #error_log /usr/local/var/log/nginx/error.log;
+
+        add_header 'Access-Control-Allow-Origin' '*';
+        add_header 'Access-Control-Allow-Credentials' 'true';
+        add_header 'Access-Control-Allow-Methods' 'GET, POST, OPTIONS';
+        add_header 'Access-Control-Allow-Headers' 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type';
+
+        location / {
+                try_files $uri $uri/ /index.php?$query_string;
+                #if (!-e $request_filename) {
+                #       rewrite ^/(.*)$ /index.php?/$1 last;
+                #        break;
+                #}
+        }
+        location /ip {
+                add_header Content-Type html/text;
+                return 200 $request_uri;
+        }
+
+        location ~ '\.php$' {
+                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+                fastcgi_pass php:9000;
+                fastcgi_index index.php;
+                fastcgi_read_timeout 60;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+                include fastcgi_params;
+        }
+}
 
 
 =============
@@ -98,6 +146,7 @@ docker run  -it \
 php:7.0-apache
 
 docker run  -it \
+--name  aha-php-apache \
 --privileged=true \
 -u root \
 -d \
